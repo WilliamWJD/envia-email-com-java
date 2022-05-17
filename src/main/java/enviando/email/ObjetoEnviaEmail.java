@@ -28,7 +28,7 @@ public class ObjetoEnviaEmail {
 		this.textoEmail = textoEmail;
 	}
 
-	public void enviarEmail() {
+	public void enviarEmail(boolean enviaHtml) {
 		try {
 			Properties properties = new Properties();
 
@@ -57,7 +57,12 @@ public class ObjetoEnviaEmail {
 			message.setFrom(new InternetAddress(userName, nomeRemetente));
 			message.setRecipients(Message.RecipientType.TO, toUser);
 			message.setSubject(assuntoEmail);
-			message.setText(textoEmail);
+
+			if (enviaHtml) {
+				message.setContent(textoEmail, "text/html; charset=utf-8");
+			}else{				
+				message.setText(textoEmail);
+			}
 
 			Transport.send(message);
 		} catch (Exception e) {
