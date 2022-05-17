@@ -1,13 +1,5 @@
 package enviando.email;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-
 /**
  * Hello world!
  *
@@ -26,22 +18,9 @@ public class App {
 		ObjetoEnviaEmail enviaEmail = new ObjetoEnviaEmail("william.jose.wjd@gmail.com", "William Dias - Dev Backend",
 				"Teste", stringBuilderTextoEmail.toString());
 
-		enviaEmail.enviarEmail(true);
+//		enviaEmail.enviarEmail(true);
+		enviaEmail.enviarEmailAnexo(true);
 	}
 	
-	// METODO SIMULA O PDF OU QUALQUER ARQUIVO QUE POSSA SER ENVIADO POR ANEXO NO E-MAIL
-	private FileInputStream simuladorDePDF() throws Exception{
-		Document document = new Document();
-		
-		File file = new File("anexo.pdf");
-		file.createNewFile();
-		
-		PdfWriter.getInstance(document, new FileOutputStream(file));
-		
-		document.open();
-		document.add(new Paragraph("Conteudo do PDF anexo com JavaMail"));
-		document.close();
-		
-		return new FileInputStream(file);
-	}
+	
 }
